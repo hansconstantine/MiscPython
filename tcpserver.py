@@ -1,5 +1,6 @@
 import socket
 import threading
+import hashlib
 
 bind_ip = "0.0.0.0"
 bind_port = 9998
@@ -19,7 +20,7 @@ def handle_client(client_socket):
 
     print "[*] Recieved: %s" % request
 
-    client_socket.send("ACK!\n")
+    client_socket.send(hashlib.sha256(request).hexdigest() + "\n")
 
     client_socket.close()
 
